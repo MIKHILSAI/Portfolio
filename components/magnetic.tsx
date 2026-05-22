@@ -1,9 +1,9 @@
 'use client'
 
-import { type HTMLAttributes, type MouseEvent, type ReactNode, useRef } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { type MouseEvent, type ReactNode, useRef } from 'react'
+import { motion, type HTMLMotionProps, useMotionValue, useSpring } from 'framer-motion'
 
-interface MagneticProps extends HTMLAttributes<HTMLDivElement> {
+interface MagneticProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   children: ReactNode
   strength?: number
   rotation?: number
