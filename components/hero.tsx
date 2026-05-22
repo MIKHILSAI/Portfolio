@@ -46,7 +46,7 @@ export default function Hero() {
           className="glass-dark inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-300"
         >
           <span className="h-2 w-2 rounded-full bg-slate-400 shadow-[0_0_16px_rgba(148,163,184,0.45)] dark:bg-indigo-300 dark:shadow-[0_0_18px_rgba(129,140,248,0.65)]" />
-          AI • Web3 • Interactive Systems
+          AI • ML • Interactive Websites
         </motion.div>
 
         <motion.h2 variants={fadeUp} className="text-6xl md:text-7xl xl:text-8xl font-semibold tracking-tight text-slate-950 dark:text-white text-glow leading-tight">
