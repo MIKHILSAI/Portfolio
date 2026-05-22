@@ -118,7 +118,7 @@ export default function Achievements() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  <Icon className={`w-8 h-8 mb-3 text-slate-800 dark:text-transparent dark:bg-gradient-to-br dark:${achievement.color} dark:bg-clip-text group-hover:scale-110 transition-transform duration-300`} />
+                  <Icon className={`w-8 h-8 mb-3 text-slate-800 dark:text-white group-hover:scale-110 transition-transform duration-300`} />
                   <p className="font-bold text-lg text-foreground mb-1 group-hover:text-blue-600 dark:group-hover:text-primary transition-colors">{achievement.title}</p>
                   <p className="text-sm font-semibold text-blue-600 dark:text-primary mb-1">{achievement.event}</p>
                   <p className="text-xs text-slate-600 dark:text-foreground/60">{achievement.description}</p>
