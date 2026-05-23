@@ -21,21 +21,21 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-      const scrolled = window.scrollY / height
+      const scrolled = height > 0 ? window.scrollY / height : 0
       setScrollProgress(scrolled * 100)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <main className="relative min-h-screen bg-background dark:bg-slate-950/95 text-foreground">
+    <>
       <ParticleBackground />
       <ScrollProgress progress={scrollProgress} />
-      <Navbar />
-      
-      <div className="relative z-10">
+      <div className="relative z-10 flex w-full flex-col">
+        <Navbar />
         <Hero />
         <About />
         <Skills />
@@ -47,6 +47,6 @@ export default function Home() {
         <Contact />
         <Footer />
       </div>
-    </main>
+    </>
   )
 }

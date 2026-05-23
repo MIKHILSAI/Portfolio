@@ -12,14 +12,6 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'CrimeRadar AI',
-      description: 'AI-based crime prediction & hotspot analysis system using machine learning algorithms to identify high-risk areas and predict crime patterns.',
-      tech: ['Python', 'Flask', 'SQLite', 'Machine Learning'],
-      github: 'https://github.com/MIKHILSAI/Crime-Detection',
-      live: 'https://github.com/MIKHILSAI/Crime-Detection',
-      featured: true,
-    },
-    {
       title: 'EcoWattAI',
       description: 'AI energy optimization platform leveraging machine learning models and interactive dashboards for real-time energy consumption monitoring.',
       tech: ['React', 'Node.js', 'Machine Learning', 'Data Analysis'],
@@ -29,7 +21,7 @@ export default function Projects() {
     },
     {
       title: 'Nokia OptiFlow',
-      description: 'Network optimization system delivering real-time efficiency improvements using advanced algorithms for telecommunication networks.',
+      description: 'AI-driven production scheduling system enabling real-time adaptive resource management for optimized manufacturing efficiency.',
       tech: ['React', 'Node.js', 'Machine Learning', 'Data Analysis'],
       github: 'https://github.com/MIKHILSAI/Nokia-Optiflow',
       live: 'https://github.com/MIKHILSAI/Nokia-Optiflow',
@@ -48,13 +40,6 @@ export default function Projects() {
       tech: ['Python', 'React', 'IoT', 'Machine Learning'],
       github: 'https://github.com/MIKHILSAI/WildLife-Intrution',
       live: 'https://github.com/MIKHILSAI/WildLife-Intrution',
-    },
-    {
-      title: 'Web-based LMS',
-      description: 'Platform for browsing/enrolling in courses and instructor-led course creation/upload. Uses Cloudinary for media.',
-      tech: ['Python', 'Cloudinary', 'Web Development', 'JavaScript'],
-      github: 'https://github.com/MIKHILSAI/Learning-Management-System',
-      live: 'https://github.com/MIKHILSAI/Learning-Management-System',
     },
   ]
 

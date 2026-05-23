@@ -45,9 +45,10 @@ export default function ParticleBackground() {
     if (!ctx) return
 
     const isDark = resolvedTheme !== 'light'
+    const isSmallScreen = window.innerWidth < 640
     const isMobile = window.innerWidth < 768
-    const particleCount = reducedMotion ? 18 : isMobile ? 34 : 68
-    const connectionDistance = isMobile ? 90 : 124
+    const particleCount = reducedMotion ? 12 : isSmallScreen ? 24 : isMobile ? 34 : 54
+    const connectionDistance = isSmallScreen ? 72 : isMobile ? 96 : 132
     const pointer = {
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
@@ -58,8 +59,8 @@ export default function ParticleBackground() {
     const trail: TrailPoint[] = []
     const particles: Particle[] = []
     const colors = isDark
-      ? ['226, 232, 240', '148, 163, 184', '129, 140, 248', '96, 165, 250']
-      : ['15, 23, 42', '71, 85, 105', '99, 102, 241', '59, 130, 246']
+      ? ['172, 211, 255', '96, 165, 250', '59, 130, 246', '139, 92, 246']
+      : ['71, 85, 105', '147, 197, 253', '192, 132, 252', '59, 130, 246']
 
     let animationId = 0
     let fogTime = 0
@@ -90,29 +91,74 @@ export default function ParticleBackground() {
       }
     }
 
-    const drawFog = () => {
+    const drawAurora = () => {
+      if (isSmallScreen) return
       fogTime += 0.0022
+      const auroras = [
+        {
+          x: window.innerWidth * 0.14,
+          y: window.innerHeight * 0.28,
+          amplitude: 36,
+          radius: 260,
+          color: isDark ? '6, 182, 212' : '59, 130, 246',
+          alpha: isDark ? 0.08 : 0.045,
+          phase: fogTime * 0.9,
+        },
+        {
+          x: window.innerWidth * 0.82,
+          y: window.innerHeight * 0.18,
+          amplitude: 24,
+          radius: 200,
+          color: isDark ? '96, 165, 250' : '147, 197, 253',
+          alpha: isDark ? 0.06 : 0.035,
+          phase: fogTime * 1.05,
+        },
+      ]
+
+      auroras.forEach((layer) => {
+        const gradient = ctx.createLinearGradient(0, layer.y - layer.radius * 0.4, 0, layer.y + layer.radius * 0.6)
+        gradient.addColorStop(0, `rgba(${layer.color}, 0)`)
+        gradient.addColorStop(0.25, `rgba(${layer.color}, ${layer.alpha * 0.28})`)
+        gradient.addColorStop(0.5, `rgba(${layer.color}, ${layer.alpha * 0.18})`)
+        gradient.addColorStop(0.9, `rgba(${layer.color}, 0)`)
+        ctx.fillStyle = gradient
+        ctx.save()
+        ctx.globalAlpha = 0.75
+        ctx.beginPath()
+        ctx.moveTo(-120, layer.y)
+        const controlY = layer.y + Math.sin(layer.phase) * layer.amplitude
+        ctx.bezierCurveTo(window.innerWidth * 0.2, controlY - 40, window.innerWidth * 0.45, controlY + 32, window.innerWidth * 0.6, layer.y - 8)
+        ctx.bezierCurveTo(window.innerWidth * 0.78, controlY + 42, window.innerWidth + 120, layer.y + 34, window.innerWidth + 120, layer.y)
+        ctx.lineTo(window.innerWidth + 120, layer.y + 120)
+        ctx.lineTo(-120, layer.y + 120)
+        ctx.closePath()
+        ctx.fill()
+        ctx.restore()
+      })
+    }
+
+    const drawFog = () => {
       const fogLayers = [
         {
           x: window.innerWidth * 0.18 + Math.sin(fogTime * 0.8) * 30,
           y: window.innerHeight * 0.28 + Math.cos(fogTime) * 24,
-          radius: isMobile ? 180 : 260,
+          radius: isMobile ? 140 : 220,
           color: isDark ? '99, 102, 241' : '148, 163, 184',
-          alpha: isDark ? 0.08 : 0.06,
+          alpha: isDark ? 0.08 : 0.05,
         },
         {
           x: window.innerWidth * 0.78 + Math.cos(fogTime * 0.7) * 26,
           y: window.innerHeight * 0.22 + Math.sin(fogTime * 1.1) * 22,
-          radius: isMobile ? 140 : 220,
+          radius: isMobile ? 120 : 180,
           color: isDark ? '96, 165, 250' : '71, 85, 105',
-          alpha: isDark ? 0.06 : 0.045,
+          alpha: isDark ? 0.06 : 0.04,
         },
         {
           x: window.innerWidth * 0.52 + Math.sin(fogTime * 0.45) * 24,
           y: window.innerHeight * 0.78 + Math.cos(fogTime * 0.6) * 18,
-          radius: isMobile ? 180 : 280,
-          color: isDark ? '226, 232, 240' : '129, 140, 248',
-          alpha: isDark ? 0.04 : 0.035,
+          radius: isMobile ? 160 : 240,
+          color: isDark ? '226, 232, 240' : '255, 255, 255',
+          alpha: isDark ? 0.04 : 0.03,
         },
       ]
 
@@ -180,6 +226,7 @@ export default function ParticleBackground() {
       pointer.y += (pointer.targetY - pointer.y) * (reducedMotion ? 0.06 : 0.12)
 
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      drawAurora()
       drawFog()
       drawCursorAura()
 

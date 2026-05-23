@@ -22,18 +22,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap"
         />
       </head>
-      <body className="font-sans antialiased bg-background dark:bg-slate-950/95 text-foreground transition-colors duration-300 relative min-h-screen">
+      <body className="overflow-x-hidden font-sans antialiased bg-background text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GlobalHeroBackground />
-          <div className="relative z-10 w-full h-full min-h-screen flex flex-col">
-            {children}
-          </div>
+          <main className="relative z-10 w-full">{children}</main>
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
